@@ -32,6 +32,8 @@ public class Config {
 
     public static final double SNAKE_SPACING_FACTOR = 0.85;
 
+    public static final double PART_STROKE_WITH = 2.0;
+
     // Sprint Settings
     public static final int SPRINT_MIN_SCORE = 10;
     public static final double SPRINT_FOOD_SPAWN_INTERVAL = 0.15;
