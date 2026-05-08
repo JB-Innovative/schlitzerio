@@ -1,3 +1,5 @@
+package model;
+
 import com.almasb.fxgl.entity.Entity;
 
 import java.util.ArrayList;
