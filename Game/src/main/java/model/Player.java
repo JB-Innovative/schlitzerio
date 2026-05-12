@@ -18,7 +18,6 @@ public class Player {
     public void setVecsFromMousePos{
         ;
     }
-}
 //score:
 public void addScore(int amount){
     score = score + amount;
