@@ -114,7 +114,7 @@ public class Snake {
         return lastSprintFoodPos;
     }
 
-    public void shrink(double lengthAmount, double radiusAmount, double speedAmount) {
+   public void shrink(double lengthAmount, double radiusAmount, double speedAmount) {
         targetLength = Math.max(Config.SNAKE_MIN_LENGTH, targetLength - lengthAmount);
         snakeRadius = Math.max(Config.SNAKE_MIN_RADIUS, snakeRadius - radiusAmount);
         normalSpeed = Math.max(Config.SNAKE_MIN_SPEED, normalSpeed - speedAmount);
