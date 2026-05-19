@@ -114,4 +114,90 @@ public class Snake {
         return lastSprintFoodPos;
     }
 
+   public void shrink(double lengthAmount, double radiusAmount, double speedAmount) {
+        targetLength = Math.max(Config.SNAKE_MIN_LENGTH, targetLength - lengthAmount);
+        snakeRadius = Math.max(Config.SNAKE_MIN_RADIUS, snakeRadius - radiusAmount);
+        normalSpeed = Math.max(Config.SNAKE_MIN_SPEED, normalSpeed - speedAmount);
+        sprintSpeed = normalSpeed * Config.SPRINT_SPEED_MULTIPLIER;
+    }
+
+    public void updateTrail() {
+        trail.addFirst(headWorldPosition);
+
+        if (trail.size() > (int) targetLength * 100) {
+            trail.removeLast();
+        }
+
+        while (snakeParts.size() < (int) targetLength) {
+            Circle part = createPart(false);
+            snakeParts.add(part);
+            snakeGroup.getChildren().add(part);
+        }
+
+        while (snakeParts.size() > (int) targetLength) {
+            Circle removed = snakeParts.removeLast();
+            snakeGroup.getChildren().remove(removed);
+        }
+
+        for (Circle part : snakeParts) {
+            part.setRadius(snakeRadius);
+        }
+
+        if (!snakeParts.isEmpty()) {
+            snakeParts.getFirst().setFill(color);
+        }
+    }
+
+    public void render(double spacing) {
+        Point2D lastPartPos = headWorldPosition;
+        int trailIndex = 0;
+
+        for (int i = 0; i < snakeParts.size(); i++) {
+            Circle part = snakeParts.get(i);
+
+            if (i == 0) {
+                part.setCenterX(headWorldPosition.getX());
+                part.setCenterY(headWorldPosition.getY());
+                part.setVisible(true);
+            } else {
+                boolean found = false;
+                while (trailIndex < trail.size()) {
+                    Point2D p = trail.get(trailIndex);
+                    if (p.distance(lastPartPos) >= spacing) {
+                        part.setCenterX(p.getX());
+                        part.setCenterY(p.getY());
+                        lastPartPos = p;
+                        found = true;
+                        break;
+                    }
+                    trailIndex++;
+                }
+                part.setVisible(found);
+            }
+
+            if (part.isVisible()) {
+                double scale = 1.0 - i / (double) snakeParts.size() * 0.35;
+                part.setRadius(Math.max(5, snakeRadius * scale));
+            }
+        }
+    }
+
+    public void grow(double lengthAmount, double radiusAmount, double speedAmount, double multiplier) {
+        targetLength += lengthAmount * multiplier;
+        snakeRadius = Math.min(Config.SNAKE_MAX_RADIUS, snakeRadius + radiusAmount * multiplier);
+        normalSpeed = Math.min(Config.SNAKE_MAX_SPEED, normalSpeed + speedAmount * multiplier);
+        sprintSpeed = normalSpeed * Config.SPRINT_SPEED_MULTIPLIER;
+    }
+
+    public Point2D getHeadWorldPosition() {
+        return headWorldPosition;
+    }
+
+    public double getSnakeRadius() {
+        return snakeRadius;
+    }
+
+    public Group getSnakeGroup() {
+        return snakeGroup;
+    }
 }
