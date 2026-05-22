@@ -43,7 +43,7 @@ public class SchlitzerApp extends GameApplication {
             @NotNull
             @Override
             public FXGLMenu newMainMenu() {
-                return new SlitherMenu();
+                return new MainMenu();
             }
         });
     }
@@ -94,7 +94,7 @@ public class SchlitzerApp extends GameApplication {
     }
 
     private void handleSprintFood() {
-        Snake snake = localPlayer.getSchlange();
+        Snake snake = localPlayer.getSnake();
         if (snake.shouldSpawnSprintFood()) {
             localPlayer.subtractScore(Config.SPRINT_SCORE_LOSS);
             scoreText.setText("Punkte: " + localPlayer.getScore());
@@ -155,7 +155,7 @@ public class SchlitzerApp extends GameApplication {
     }
 
     private void checkFoodCollision() {
-        Snake snake = localPlayer.getSchlange();
+        Snake snake = localPlayer.getSnake();
         Point2D headPos = snake.getHeadWorldPosition();
         double snakeRadius = snake.getSnakeRadius();
 
@@ -205,7 +205,7 @@ public class SchlitzerApp extends GameApplication {
     }
 
     private void renderWorld() {
-        Point2D headPos = localPlayer.getSchlange().getHeadWorldPosition();
+        Point2D headPos = localPlayer.getSnake().getHeadWorldPosition();
 
         double cameraX = headPos.getX() - Config.WIDTH / 2.0;
         double cameraY = headPos.getY() - Config.HEIGHT / 2.0;
@@ -213,7 +213,7 @@ public class SchlitzerApp extends GameApplication {
         worldGroup.setTranslateX(-cameraX);
         worldGroup.setTranslateY(-cameraY);
 
-        localPlayer.getSchlange().render(localPlayer.getSchlange().getSnakeRadius() * Config.SNAKE_SPACING_FACTOR);
+        localPlayer.getSnake().render(localPlayer.getSnake().getSnakeRadius() * Config.SNAKE_SPACING_FACTOR);
 
         for (Food food : foods) {
             food.view.setCenterX(food.position.getX());

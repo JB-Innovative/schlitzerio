@@ -9,6 +9,14 @@ public class Player {
     private int score;
     private String name;
 
+    public Player(String name, Snake snake) {
+
+    }
+
+    public void subtractScore(int amount) {
+        score = Math.max(0, score - amount);
+    }
+
     private boolean sprinting = false;
 
     public void toggleSprinting() { //TODO Noch_nicht_bekannt_ob_richtig
