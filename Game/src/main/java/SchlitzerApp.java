@@ -103,7 +103,7 @@ public class SchlitzerApp extends GameApplication {
         }
     }
 
-    private void addFoodAt(Point2D pos, FoodType type) {
+    private void addFoodAt(Point2D pos, @NotNull FoodType type) {
         double radius;
         switch (type) {
             case SMALL: radius = Config.FOOD_SMALL_RADIUS; break;

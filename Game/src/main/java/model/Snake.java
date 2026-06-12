@@ -99,7 +99,7 @@ public class Snake {
     }
 
     private Point2D getTailPosition() {
-        if (snakeParts.size() > 2) return headWorldPosition;
+        if (snakeParts.size() < 2) return headWorldPosition;
         Circle lastPart = snakeParts.get(snakeParts.size() - 1);
         return new Point2D(lastPart.getCenterX(), lastPart.getCenterY());
     }
