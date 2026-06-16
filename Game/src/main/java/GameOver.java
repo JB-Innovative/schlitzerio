@@ -13,15 +13,15 @@ public class GameOver extends FXGLMenu {
     public GameOver()
     {
         super(MenuType.MAIN_MENU);
-        Rectangle bg=new Rectangle(Config.WIDTH, Config.Color, Config.HEIGHT);
+        Rectangle bg=new Rectangle(Config.WIDTH, Config.HEIGHT, Color.rgb(10, 10, 20));
         getContentRoot().getChildren().add(bg);
 
-        Vbox vbox= new VBox(20);
-        vbox.setAlignement(Pos.CENTER);
+        VBox vbox = new VBox(20);
+        vbox.setAlignment(Pos.CENTER);
         vbox.setPrefSize(Config.WIDTH, Config.HEIGHT);
 
         Text title = new Text(Config.TITLE);
-        title.setfill(Color.LIMEGREEN);
+        title.setFill(Color.LIMEGREEN);
         title.setStyle("-fx-font-size: 64px; -fx-font-weight: bold;");
 
         Button playAgain = new Button("NEU STARTEN");
@@ -36,7 +36,7 @@ public class GameOver extends FXGLMenu {
         exit.setStyle("-fx-font-size: 24px; -fx-base: #CD5C5C; -fx-text-fill: white;");
         exit.setOnAction( e-> fireExit());
 
-        vbox.getChildren().addAll(title); playAgain, exit, menu);
+        vbox.getChildren().addAll(title, playAgain, exit, menu);
         getContentRoot().getChildren().add(vbox);
     }
 }
